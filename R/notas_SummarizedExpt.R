@@ -7,6 +7,7 @@ library("SummarizedExperiment") # carga de la libreria
 
 ## Creamos los datos para nuestro objeto de tipo SummarizedExperiment
 ## para 200 genes a lo largo de 6 muestras
+
 nrows <- 200 # Numero de filas: 200
 ncols <- 6 # numero columnas: 6
 
@@ -96,6 +97,6 @@ sce_layer # filas: 22331 columnas: 76
 ## Revisemos el tamaño de este objeto
 lobstr::obj_size(sce_layer)
 
-
 ## ----explore_sce_layer, eval = FALSE--------------------------
+
 iSEE::iSEE(sce_layer)
