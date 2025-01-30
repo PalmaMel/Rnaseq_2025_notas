@@ -1,9 +1,16 @@
 ---
-title: "Notas_Teóricas"
-output: html_notebook
+title: "Practicas_Clases"
+author: "PalmaMel"
+output:
+  html_document:
+    toc: true
+    toc_depth: '5'
+    df_print: paged
+toc-title: Índice de contenidos
 ---
 
-# REGEX e SESSIONINFO
+# Clase 1: REGEX e SESSIONINFO
+
 
 ```{r}
 library("reprex")
@@ -20,7 +27,7 @@ reprex(
 
 ---
 
-# Clase 2
+# Clase 2: Bioconductor y SummarizedExperiment
 
 ## Resumen discusión 2.6 Ejercicio grupal
 
@@ -32,21 +39,44 @@ The 'funOmics' package ggregates or summarizes omics data into higher level func
 
 Resumen: Este paquete se encarga de agregar y resumir datos ómicos en representaciones funcionales de nivel superior en grupos que representan funciones biológicas más amplias facilitando la interpretación de los datos y ayudando a encontrar patrones globales en la muestra.
 
-rank: 2241/2289
-support: 0/0
-Updated: before realease
-Dependencies 93
-in Bioc < 6 months
-
-No tenía publicaciones
-
-versión 1.0.0 
+- versión 1.0.0
+- rank: 2241/2289
+- support: 0/0
+- Updated: before realease
+- Dependencies 93
+- in Bioc < 6 months
+- No tenía publicaciones
+- versión 1.0.0 
 
 #### Cita: 
 `Gomez de Lope E (2024). funOmics: Aggregating Omics Data into Higher-Level Functional Representations. R package version 1.0.0, https://github.com/elisagdelope/funomics.`
-### Discusión: 
 
-En primero elegí el paquete por el título llamativo...
+DOI: [10.18129/B9.bioc.funOmics](https://doi.org/doi:10.18129/B9.bioc.funOmics)
+
+#### Discusión: 
+
+En primero elegí el paquete por el título llamativo, es un paquete reciente de 23 de enero de este año y sin ninguna publicación afiliada. Una vez revisando la documentación del mismo destaca que tanto el HTML y el manual PDF se destaca que las descripciones no son cortas, no obstante los bloques de código carececen de comentarios en el HTML.
+
+## Ejercicio rse
+
+**Comando 1:** `rse[1:2, ]`
+Repuestas: Muestra unicamente dos filas (los genes gene_1 y gene_2)  y todas sus columnas (A,B,C,D,E,F)
+
+**Comando 2:**`rse[, c("A", "D", "F")]`
+Repuestas: Muestra las columas 1,4 y 6, y todas sus filas (gene_1 a gene_200)
+
+**Extras:** 
+`identical(rse[,c(1,4,6)],rse[,c("A","D","F")])`
+Regresa vector logico que nos indica si los objetos son iguales
+
+Detiene si la condicón no se cumple:
+`stopifnot(identical(rse[,c(1,4,6)],rse[,c("A","D","F")]))`
+
+## Ejercicio PDF isee
+
+### Resultados
+
+
 
 
 
