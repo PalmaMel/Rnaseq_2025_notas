@@ -1645,6 +1645,16 @@ Bioconductor:</a></li>
 <li><a href="#discusión" id="toc-discusión">Discusión:</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#ejercicio-rse" id="toc-ejercicio-rse">Ejercicio
+rse</a></li>
+<li><a href="#ejercicio-pdf-isee" id="toc-ejercicio-pdf-isee">Ejercicio
+PDF isee</a>
+<ul>
+<li><a href="#resultados" id="toc-resultados">Resultados</a>
+<ul>
+<li><a href="#cita-1" id="toc-cita-1">Cita:</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -1685,16 +1695,9 @@ scores can be as informative as single molecules!</p>
 representaciones funcionales de nivel superior en grupos que representan
 funciones biológicas más amplias facilitando la interpretación de los
 datos y ayudando a encontrar patrones globales en la muestra.</p>
-<ul>
-<li>versión 1.0.0</li>
-<li>rank: 2241/2289</li>
-<li>support: 0/0</li>
-<li>Updated: before realease</li>
-<li>Dependencies 93</li>
-<li>in Bioc &lt; 6 months</li>
-<li>No tenía publicaciones</li>
-</ul>
-<p>versión 1.0.0</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD - versión 1.0.0 - rank: 2241/2289 -
+support: 0/0 - Updated: before realease - Dependencies 93 - in Bioc &lt;
+6 months - No tenía publicaciones - versión 1.0.0</p>
 </div>
 <div id="cita" class="section level4">
 <h4>Cita:</h4>
@@ -1708,6 +1711,36 @@ reciente de 23 de enero de este año y sin ninguna publicación afiliada.
 Una vez revisando la documentación del mismo destaca que tanto el HTML y
 el manual PDF se destaca que las descripciones no son cortas, no
 obstante los bloques de código carececen de comentarios en el HTML.</p>
+</div>
+</div>
+</div>
+<div id="ejercicio-rse" class="section level2">
+<h2>Ejercicio rse</h2>
+<p><strong>Comando 1:</strong> <code>rse[1:2, ]</code> Repuestas:
+Muestra unicamente dos filas (los genes gene_1 y gene_2) y todas sus
+columnas (A,B,C,D,E,F)</p>
+<p><strong>Comando 2:</strong><code>rse[, c(&quot;A&quot;, &quot;D&quot;, &quot;F&quot;)]</code>
+Repuestas: Muestra las columas 1,4 y 6, y todas sus filas (gene_1 a
+gene_200)</p>
+<p><strong>Extras:</strong>
+<code>identical(rse[,c(1,4,6)],rse[,c(&quot;A&quot;,&quot;D&quot;,&quot;F&quot;)])</code> Regresa
+vector logico que nos indica si los objetos son iguales</p>
+<p>Detiene si la condicón no se cumple:
+<code>stopifnot(identical(rse[,c(1,4,6)],rse[,c(&quot;A&quot;,&quot;D&quot;,&quot;F&quot;)]))</code></p>
+</div>
+<div id="ejercicio-pdf-isee" class="section level2">
+<h2>Ejercicio PDF isee</h2>
+<div id="resultados" class="section level3">
+<h3>Resultados</h3>
+<p>======= rank: 2241/2289 support: 0/0 Updated: before realease
+Dependencies 93 in Bioc &lt; 6 months</p>
+<p>No tenía publicaciones</p>
+<p>versión 1.0.0</p>
+<div id="cita-1" class="section level4">
+<h4>Cita:</h4>
+<p><code>Gomez de Lope E (2024). funOmics: Aggregating Omics Data into Higher-Level Functional Representations. R package version 1.0.0, https://github.com/elisagdelope/funomics.</code>
+### Discusión:</p>
+<p>En primero elegí el paquete por el título llamativo…</p>
 </div>
 </div>
 </div>
