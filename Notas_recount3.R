@@ -6,6 +6,11 @@ library("recount3")
 ## ----'quick_example'------------------------------------------
 ## Revisemos todos los proyectos con datos de humano en recount3
 human_projects <- available_projects()
+# class(human_projects) # dice el tipo de clase
+# dim(human_projects) # ver dimensiones
+# head o tail ver estructura inicio o final
+
+# head (human_projects[])...
 
 ## Encuentra tu proyecto de interés. Aquí usaremos
 ## SRP009615 de ejemplo
@@ -13,6 +18,7 @@ proj_info <- subset(
   human_projects,
   project == "SRP009615" & project_type == "data_sources"
 )
+
 ## Crea un objeto de tipo RangedSummarizedExperiment (RSE)
 ## con la información a nivel de genes
 rse_gene_SRP009615 <- create_rse(proj_info)
@@ -22,7 +28,8 @@ rse_gene_SRP009615
 
 ## ----"interactive_display", eval = FALSE----------------------
 # ## Explora los proyectos disponibles de forma interactiva
-# proj_info_interactive <- interactiveDisplayBase::display(human_projects)
+#install.packages("interactiveDisplayBase")
+#proj_info_interactive <- interactiveDisplayBase::display(human_projects)
 # ## Selecciona un solo renglón en la tabla y da click en "send".
 #
 # ## Aquí verificamos que solo seleccionaste un solo renglón.
@@ -36,7 +43,10 @@ rse_gene_SRP009615
 ## usando compute_read_counts().
 ## Para otras transformaciones como RPKM y TPM, revisa transform_counts().
 assay(rse_gene_SRP009615, "counts") <- compute_read_counts(rse_gene_SRP009615)
+# crea matriz de cuentas
 
+# borrar assayNames(rse_gene_SRP009615)
+# "raw_counts"
 
 ## ----"expand_attributes"--------------------------------------
 ## Para este estudio en específico, hagamos más fácil de usar la
@@ -46,3 +56,7 @@ colData(rse_gene_SRP009615)[
   ,
   grepl("^sra_attribute", colnames(colData(rse_gene_SRP009615)))
 ]
+
+iSEE::iSEE(rse_gene_SRP009615)
+
+

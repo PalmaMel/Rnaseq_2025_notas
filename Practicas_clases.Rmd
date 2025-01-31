@@ -73,9 +73,13 @@ Detiene si la condicón no se cumple:
 `stopifnot(identical(rse[,c(1,4,6)],rse[,c("A","D","F")]))`
 
 ## Ejercicio PDF isee
+Ruta del PDF con la primera imagen: `~/Desktop/Rnaseq_2025_notas/images/ReducedDimensionPlot1.pdf`
 
-### Resultados
+Ruta del PDF con la segunda imagen: `~/Desktop/Rnaseq_2025_notas/images/`
 
+---
 
+# Clase 3: Recount
 
+Ruta del PDF con la imagen: `~/Desktop/Rnaseq_2025_notas/images/FeatureAssayPlot1.pdf`
 
