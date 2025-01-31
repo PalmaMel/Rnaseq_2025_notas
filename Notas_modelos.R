@@ -58,7 +58,33 @@ Patient = factor(rep(c(1:6, 8, 11:18), each = 2)),
 Treatment = factor(rep(c("pre","post"), 15)),
 ind.n = factor(rep(c(1:6, 2, 5:12), each = 2))))
 
+vd <- ExploreModelMatrix::VisualizeDesign(
+  sampleData = sampleData,
+  designFormula = ~ Response + Response:ind.n + Response:Treatment,
+  textSizeFitted = 3
+)
+cowplot::plot_grid(plotlist = vd$plotlist, ncol = 1)
 
+# EJEMPLO3
+
+(sampleData = data.frame(
+  condition = factor(rep(c("ctrl_minus", "ctrl_plus",
+                           "ko_minus", "ko_plus"), 3)),
+batch = factor(rep(1:6, each = 2))))
+vd <- VisualizeDesign(sampleData = sampleData,
+                      designFormula = ~ 0 + batch + condition,
+                      textSizeFitted = 4, lineWidthFitted = 20,
+                      dropCols = "conditionko_minus")
+cowplot::plot_grid(plotlist = vd$plotlist, ncol = 1)
+
+app <- ExploreModelMatrix(sampleData = sampleData,
+                          designFormula = ~ batch + condition)
+#> The `name` provided ('') does not correspond to a known icon
+#> The `name` provided ('hand-o-right') does not correspond to a known icon
+#> The `name` provided ('question-circle fa-1g') does not correspond to a known icon
+if (interactive()) {
+  shiny::runApp(app)
+}
 
 ## ----download_SRP045638---------------------------------------
 library("recount3")
