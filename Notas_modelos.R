@@ -7,7 +7,13 @@ colnames(mat)
 
 ## ----lm_example-----------------------------------------------
 summary(lm(log(Volume) ~ log(Height) + log(Girth), data = trees))
+## mas informacion
 
+# Analisis de expresion son regresiones lineales.
+# Queremos datos especificos:
+# Reportar estimado, t y p
+
+# Entender funcion model.matrix
 
 ## ----EMM_example1---------------------------------------------
 ## Datos de ejemplo
@@ -17,6 +23,8 @@ summary(lm(log(Volume) ~ log(Height) + log(Girth), data = trees))
 ))
 
 ## Creemos las imágenes usando ExploreModelMatrix
+# permite visualizar la matriz de diseño: VisualizeDesign
+
 vd <- ExploreModelMatrix::VisualizeDesign(
   sampleData = sampleData,
   designFormula = ~ genotype + treatment,
@@ -26,14 +34,30 @@ vd <- ExploreModelMatrix::VisualizeDesign(
 ## Veamos las imágenes
 cowplot::plot_grid(plotlist = vd$plotlist)
 
+mat2 <- with(sampleData, model.matrix(~ genotype + treatment))
+mat2
+colnames(mat2)
+
+cbind(mat2,sampleData)
+# Valor de 1 pegado al lado del nombre, por eso salen al lado del nombre
+# asigna alfabeticamente cual es 0 o 1
+
 
 ## ----EMM_example1_interactive, eval = FALSE-------------------
 # ## Usaremos shiny otra ves
-# app <- ExploreModelMatrix(
-#     sampleData = sampleData,
-#     designFormula = ~ genotype + treatment
-# )
-# if (interactive()) shiny::runApp(app)
+app <- ExploreModelMatrix::ExploreModelMatrix(sampleData = sampleData,
+     designFormula = ~ genotype + treatment
+ )
+ if (interactive()) shiny::runApp(app)
+
+
+## EJEMPLO2
+(sampleData <- data.frame(
+Response = rep(c("Resistant", "Sensitive"), c(12, 18)),
+Patient = factor(rep(c(1:6, 8, 11:18), each = 2)),
+Treatment = factor(rep(c("pre","post"), 15)),
+ind.n = factor(rep(c(1:6, 2, 5:12), each = 2))))
+
 
 
 ## ----download_SRP045638---------------------------------------
