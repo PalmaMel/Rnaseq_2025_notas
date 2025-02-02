@@ -71,17 +71,15 @@ cowplot::plot_grid(plotlist = vd$plotlist, ncol = 1)
   condition = factor(rep(c("ctrl_minus", "ctrl_plus",
                            "ko_minus", "ko_plus"), 3)),
 batch = factor(rep(1:6, each = 2))))
-vd <- VisualizeDesign(sampleData = sampleData,
+vd <- ExploreModelMatrix::VisualizeDesign(sampleData = sampleData,
                       designFormula = ~ 0 + batch + condition,
                       textSizeFitted = 4, lineWidthFitted = 20,
                       dropCols = "conditionko_minus")
+# 0 quita la referencia o intercepto
 cowplot::plot_grid(plotlist = vd$plotlist, ncol = 1)
 
-app <- ExploreModelMatrix(sampleData = sampleData,
-                          designFormula = ~ batch + condition)
-#> The `name` provided ('') does not correspond to a known icon
-#> The `name` provided ('hand-o-right') does not correspond to a known icon
-#> The `name` provided ('question-circle fa-1g') does not correspond to a known icon
+app <- ExploreModelMatrix::ExploreModelMatrix(sampleData = sampleData,
+
 if (interactive()) {
   shiny::runApp(app)
 }
@@ -103,8 +101,8 @@ assay(rse_gene_SRP045638, "counts") <- compute_read_counts(rse_gene_SRP045638)
 ## ----describe_issue-------------------------------------------
 rse_gene_SRP045638$sra.sample_attributes[1:3]
 
-
 ## ----solve_issue----------------------------------------------
+# eliminamos dev_stage;;Fetal
 rse_gene_SRP045638$sra.sample_attributes <- gsub("dev_stage;;Fetal\\|", "", rse_gene_SRP045638$sra.sample_attributes)
 rse_gene_SRP045638$sra.sample_attributes[1:3]
 
@@ -128,8 +126,7 @@ rse_gene_SRP045638$sra_attribute.sex <- factor(rse_gene_SRP045638$sra_attribute.
 ## Resumen de las variables de interés
 summary(as.data.frame(colData(rse_gene_SRP045638)[
   ,
-  grepl("^sra_attribute.[age|disease|RIN|sex]", colnames(colData(rse_gene_SRP045638)))
-]))
+  grepl("^sra_attribute.[age|disease|RIN|sex]", colnames(colData(rse_gene_SRP045638)))]))
 
 
 ## ----new_variables--------------------------------------------
@@ -138,13 +135,14 @@ rse_gene_SRP045638$prenatal <- factor(ifelse(rse_gene_SRP045638$sra_attribute.ag
 table(rse_gene_SRP045638$prenatal)
 
 ## http://rna.recount.bio/docs/quality-check-fields.html
+# Numero de lecturas asignadas a genes
 rse_gene_SRP045638$assigned_gene_prop <- rse_gene_SRP045638$recount_qc.gene_fc_count_all.assigned / rse_gene_SRP045638$recount_qc.gene_fc_count_all.total
 summary(rse_gene_SRP045638$assigned_gene_prop)
+
 with(colData(rse_gene_SRP045638), plot(assigned_gene_prop, sra_attribute.RIN))
 
 ## Hm... veamos si hay una diferencia entre los grupos
 with(colData(rse_gene_SRP045638), tapply(assigned_gene_prop, prenatal, summary))
-
 
 ## ----filter_rse-----------------------------------------------
 ## Guardemos nuestro objeto entero por si luego cambiamos de opinión
@@ -176,7 +174,6 @@ dim(rse_gene_SRP045638)
 ## Porcentaje de genes que retuvimos
 round(nrow(rse_gene_SRP045638) / nrow(rse_gene_SRP045638_unfiltered) * 100, 2)
 
-
 ## ----normalize------------------------------------------------
 library("edgeR") # BiocManager::install("edgeR", update = FALSE)
 dge <- DGEList(
@@ -184,7 +181,6 @@ dge <- DGEList(
   genes = rowData(rse_gene_SRP045638)
 )
 dge <- calcNormFactors(dge)
-
 
 ## ----explore_gene_prop_by_age---------------------------------
 library("ggplot2")
@@ -198,8 +194,9 @@ ggplot(as.data.frame(colData(rse_gene_SRP045638)), aes(y = assigned_gene_prop, x
 ## ----statiscal_model------------------------------------------
 mod <- model.matrix(~ prenatal + sra_attribute.RIN + sra_attribute.sex + assigned_gene_prop,
                     data = colData(rse_gene_SRP045638)
-)
-colnames(mod)
+) # dos variables de calidad y la se sexo
+colnames(mod) # genera 5 coeficientes
+# sexo, toma de ref female, nombre agrega m de male
 
 
 ## ----run_limma------------------------------------------------
@@ -222,19 +219,24 @@ table(de_results$adj.P.Val < 0.05)
 
 ## Visualicemos los resultados estadísticos
 plotMA(eb_results, coef = 2)
+#prime prenatal nombre de la variable, segundo es de contraste(factor o alfabetico)
 
 volcanoplot(eb_results, coef = 2, highlight = 3, names = de_results$gene_name)
 de_results[de_results$gene_name %in% c("ZSCAN2", "VASH2", "KIAA0922"), ]
-
 
 ## ----pheatmap-------------------------------------------------
 ## Extraer valores de los genes de interés
 exprs_heatmap <- vGene$E[rank(de_results$adj.P.Val) <= 50, ]
 
+dim(exprs_heatmap)
+# 50 genes
+# 65 muestras
+
 ## Creemos una tabla con información de las muestras
 ## y con nombres de columnas más amigables
 df <- as.data.frame(colData(rse_gene_SRP045638)[, c("prenatal", "sra_attribute.RIN", "sra_attribute.sex")])
 colnames(df) <- c("AgeGroup", "RIN", "Sex")
+
 
 ## Hagamos un heatmap
 library("pheatmap")

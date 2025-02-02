@@ -38,7 +38,6 @@ The 'funOmics' package ggregates or summarizes omics data into higher level func
 
 Resumen: Este paquete se encarga de agregar y resumir datos ómicos en representaciones funcionales de nivel superior en grupos que representan funciones biológicas más amplias facilitando la interpretación de los datos y ayudando a encontrar patrones globales en la muestra.
 
-<<<<<<< HEAD
 - versión 1.0.0
 - rank: 2241/2289
 - support: 0/0
@@ -46,7 +45,6 @@ Resumen: Este paquete se encarga de agregar y resumir datos ómicos en represent
 - Dependencies 93
 - in Bioc < 6 months
 - No tenía publicaciones
-- versión 1.0.0 
 
 #### Cita: 
 `Gomez de Lope E (2024). funOmics: Aggregating Omics Data into Higher-Level Functional Representations. R package version 1.0.0, https://github.com/elisagdelope/funomics.`
@@ -75,7 +73,7 @@ Detiene si la condicón no se cumple:
 ## Ejercicio PDF isee
 Ruta del PDF con la primera imagen: `~/Desktop/Rnaseq_2025_notas/images/ReducedDimensionPlot1.pdf`
 
-Ruta del PDF con la segunda imagen: `~/Desktop/Rnaseq_2025_notas/images/`
+Ruta del PDF con la segunda imagen: `~/Desktop/Rnaseq_2025_notas/images/ComplexHeatmapPlot1.pdf`
 
 ---
 
